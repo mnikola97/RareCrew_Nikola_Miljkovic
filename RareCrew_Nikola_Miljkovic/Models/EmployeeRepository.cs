@@ -1,4 +1,5 @@
-﻿namespace RareCrew_Nikola_Miljkovic.Models
+﻿using System.Drawing;
+namespace RareCrew_Nikola_Miljkovic.Models
 {
     public class EmployeeRepository
     {
@@ -23,7 +24,7 @@
 
                 else
                 {
-                   employees= await response.Content.ReadFromJsonAsync<List<Employee>>();
+                    employees = await response.Content.ReadFromJsonAsync<List<Employee>>();
                 }
             }
             employees.ForEach(x => x.WorkHours = (x.EndTimeUtc - x.StarTimeUtc).TotalHours);
@@ -33,9 +34,10 @@
                 EmployeeName = g.Key,
                 WorkHours = g.Sum(s => s.WorkHours)
             });
-
             employeesData = groupData.ToList();
             return employeesData.OrderByDescending(x => x.WorkHours).ToList();
         }
+
+       
     }
 }
