@@ -1,0 +1,19 @@
+﻿@using RareCrew_Nikola_Miljkovic.Models;
+@{
+    @model List<EmployeeData>
+
+    <table>
+        <tr>
+            <th>Employee Name</th>
+            <th>Total Time Worked</th>
+        </tr>
+        @foreach (var employee in Model)
+        {
+            /*class="@(employee.StarTimeUtc 100 ? "less-than-100" : "")"*/
+            <tr class="@(employee.WorkHours< 100.0 ? "less-than-100" : "")">
+                <td>@(employee.EmployeeName == null ? "No Name" : employee.EmployeeName)</td>
+                <td>@employee.WorkHours.ToString("N2")</td>
+            </tr>
+        }
+    </table>
+}
